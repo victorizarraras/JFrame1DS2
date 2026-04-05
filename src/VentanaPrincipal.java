@@ -17,6 +17,8 @@ public class VentanaPrincipal extends JFrame {
     private JButton Limpiar;
     private JButton Salir;
     private JTextArea Observaciones;
+    private JLabel usuarios;
+    private int usuariosCont;
     private ButtonGroup Generos;
 
     //constructor
@@ -73,7 +75,14 @@ public class VentanaPrincipal extends JFrame {
         }
 
         if (edadTexto.isEmpty()) {
-            JOptionPane.showMessageDialog(null,"ERROR. Introduce tu edad.");
+            JOptionPane.showMessageDialog(null,"ERROR. Edad no puede quedar VACIO.");
+            return;
+        }
+
+        try {
+            int EdadInt = Integer.parseInt(edadTexto);
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null,"ERROR: Introduce solo numeros en Edad.");
             return;
         }
 
@@ -89,13 +98,22 @@ public class VentanaPrincipal extends JFrame {
             transporteTexto = "NO cuenta con transporte";
         }
 
-        JOptionPane.showMessageDialog(this,"Nombre: " + nombreTexto +
+        JOptionPane.showMessageDialog(this," Nombre: " + nombreTexto +
                 "\n Matricula: " + matriculaTexto +
                 "\n Edad: " + edadTexto +
                 "\n Sexo: " + sexoTexto +
                 "\n Beca Activa: " + becaTexto +
                 "\n Transporte: " + transporteTexto +
                 "\n Observaciones: " + ObsTexto);
+
+        // se suma 1 al contador
+        usuariosCont++;
+        usuarios.setText("Usuarios REGISTRADOS: " + usuariosCont);
+
+        JOptionPane.showMessageDialog(this, "Limpiando Datos....");
+
+        // para limpiar datos automaticamente despues de que se hayan mostrado correctamente
+        Limpiar();
     }
 
     private void Limpiar() {
